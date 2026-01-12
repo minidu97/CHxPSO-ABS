@@ -5,10 +5,11 @@
 */
 
 
-#include <WINDOWS.H>      
+//#include <WINDOWS.H>      
 #include <stdio.h>
 #include <math.h>
-#include <malloc.h>
+//#include <malloc.h>
+#include "test_func.h"
 
 #define INF 1.0e99
 #define EPS 1.0e-14
@@ -31,7 +32,7 @@ void schwefel_func (double *, double *, int , double *,double *, int); /* Schwef
 void katsuura_func (double *, double *, int , double *,double *, int); /* Katsuura */
 void bi_rastrigin_func (double *, double *, int , double *,double *, int); /* Lunacek Bi_rastrigin */
 void grie_rosen_func (double *, double *, int , double *,double *, int); /* Griewank-Rosenbrock  */
-void escaffer6_func (double *, double *, int , double *,double *, int); /* Expanded Scaffer¡¯s F6  */
+void escaffer6_func (double *, double *, int , double *,double *, int); /* Expanded Scafferï¿½ï¿½s F6  */
 void step_rastrigin_func (double *, double *, int , double *,double *, int); /* Noncontinuous Rastrigin's  */
 void cf01 (double *, double *, int , double *,double *, int); /* Composition Function 1 */
 void cf02 (double *, double *, int , double *,double *, int); /* Composition Function 2 */
@@ -82,7 +83,8 @@ void test_func(double *x, double *f, int nx, int mx,int func_num)
 			printf("\nError: Test functions are only defined for D=2,5,10,20,30,40,50,60,70,80,90,100.\n");
 		}
 		
-		sprintf(FileName, "input_data/M_D%d.txt", nx);
+		//snprintf(FileName, "input_data/M_D%d.txt", nx);
+		snprintf(FileName, sizeof(FileName), "input_data/M_D%d.txt", nx);
 		fpt = fopen(FileName,"r");
 		if (fpt==NULL)
 		{
@@ -94,7 +96,8 @@ void test_func(double *x, double *f, int nx, int mx,int func_num)
 			printf("\nError: there is insufficient memory available!\n");
 		for (i=0; i<cf_num*nx*nx; i++)
 		{
-				fscanf(fpt,"%Lf",&M[i]);
+				//fscanf(fpt,"%Lf",&M[i]);
+				fscanf(fpt, "%lf", &M[i]);
 		}
 		fclose(fpt);
 		
@@ -109,7 +112,7 @@ void test_func(double *x, double *f, int nx, int mx,int func_num)
 			printf("\nError: there is insufficient memory available!\n");
 		for(i=0;i<cf_num*nx;i++)
 		{
-				fscanf(fpt,"%Lf",&OShift[i]);
+				fscanf(fpt,"%lf",&OShift[i]);
 		}
 		fclose(fpt);
 
@@ -783,7 +786,7 @@ void grie_rosen_func (double *x, double *f, int nx, double *Os,double *Mr,int r_
 }
 
 
-void escaffer6_func (double *x, double *f, int nx, double *Os,double *Mr,int r_flag) /* Expanded Scaffer¡¯s F6  */
+void escaffer6_func (double *x, double *f, int nx, double *Os,double *Mr,int r_flag) /* Expanded Scafferï¿½ï¿½s F6  */
 {
     int i;
     double temp1, temp2;

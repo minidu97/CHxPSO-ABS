@@ -1,2 +1,2 @@
-# Empty dependencies file for chxpso_abs_run.
+# Empty dependencies file for chxpso.
 # This may be replaced when dependencies are built.

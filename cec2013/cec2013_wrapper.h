@@ -1,11 +1,7 @@
-// cec2013_wrapper.h
+// cec2013/cec2013_wrapper.h
 #pragma once
 #include <vector>
-
-// Forward declaration - defined in test_func.cpp
-extern "C" {
-    void test_func(double*, double*, int, int, int);
-}
+#include "test_func.h"  // Use your existing header
 
 class CEC2013Benchmark {
 private:
@@ -38,5 +34,18 @@ public:
         } else {
             lb = -32.0; ub = 32.0;
         }
+    }
+    
+    static double getOptimalValue(int func_num) {
+        if (func_num >= 1 && func_num <= 5) {
+            return -1400.0 + (func_num - 1) * 100.0;
+        }
+        else if (func_num >= 6 && func_num <= 20) {
+            return -900.0 + (func_num - 6) * 100.0;
+        }
+        else if (func_num >= 21 && func_num <= 28) {
+            return 700.0 + (func_num - 21) * 100.0;
+        }
+        return 0.0;
     }
 };

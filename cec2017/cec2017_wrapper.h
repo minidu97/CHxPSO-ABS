@@ -1,8 +1,8 @@
-// cec2017/cec2017_wrapper.h
+//cec2017/cec2017_wrapper.h
 #pragma once
 #include <vector>
 
-// Forward declaration - check the actual function name in CEC 2017 code
+//Forward declaration - check the actual function name in CEC 2017 code
 extern "C" {
     void cec17_test_func(double*, double*, int, int, int);
 }
@@ -31,14 +31,14 @@ public:
     }
     
     static void getBounds(int func_num, double& lb, double& ub) {
-        // Most CEC 2017 functions use [-100, 100]
+        //Most CEC 2017 functions use [-100, 100]
         lb = -100.0;
         ub = 100.0;
     }
     
     static double getOptimalValue(int func_num) {
-        // CEC 2017 optimal values
-        // F1=100, F3-F30 have different values
+        //CEC 2017 optimal values
+        //F1=100, F3-F30 have different values
         if (func_num == 1) return 100.0;
         else if (func_num >= 3 && func_num <= 9) return 300.0 + (func_num - 3) * 100.0;
         else if (func_num >= 10 && func_num <= 19) return 1000.0 + (func_num - 10) * 100.0;

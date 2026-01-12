@@ -2,16 +2,7 @@
 #include <vector>
 #include <cmath>
 
-// Include CEC headers if available
-#ifdef USE_CEC2013
-#include "../cec2013/cec13_func.h"
-#endif
-
-#ifdef USE_CEC2017
-#include "../cec2017/cec17_func.h"
-#endif
-
-// Basic benchmark functions
+//Basic benchmark functions
 inline double sphere(const std::vector<double>& x) {
     double sum = 0.0;
     for(double xi : x) {
@@ -56,32 +47,12 @@ inline double ackley(const std::vector<double>& x) {
            - std::exp(sum2 / n) + 20.0 + std::exp(1.0);
 }
 
-// CEC 2013 Wrapper
+//CEC 2013 Wrapper - include the wrapper file, not the implementation
 #ifdef USE_CEC2013
 #include "../cec2013/cec2013_wrapper.h"
 #endif
 
-// CEC 2017 Wrapper
+//CEC 2017 Wrapper - include the wrapper file, not the implementation
 #ifdef USE_CEC2017
-class CEC2017Benchmark {
-private:
-    int func_num;
-    int dim;
-public:
-    CEC2017Benchmark(int function_number, int dimension) 
-        : func_num(function_number), dim(dimension) {}
-    
-    double evaluate(const std::vector<double>& x) {
-        double* x_arr = new double[dim];
-        for(int i = 0; i < dim; i++) {
-            x_arr[i] = x[i];
-        }
-        
-        double fitness;
-        cec17_test_func(x_arr, &fitness, dim, 1, func_num);
-        
-        delete[] x_arr;
-        return fitness;
-    }
-};
+#include "../cec2017/cec2017_wrapper.h"
 #endif
